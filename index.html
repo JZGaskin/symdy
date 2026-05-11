@@ -25,7 +25,7 @@
         <span class="step-num">1</span>
         <div>
           <strong>Get an API key</strong>
-          <p>Create a free account at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> and generate a key. Add a few dollars in credits.</p>
+          <p>Create a free account at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> (recommended) or <a href="https://platform.deepseek.com" target="_blank">DeepSeek</a> (cheapest). Add a few dollars in credits.</p>
         </div>
       </div>
       <div class="step">
@@ -95,10 +95,31 @@
     </div>
 
     <div class="settings-section">
-      <h3>API Key</h3>
-      <p class="settings-hint">Get a key at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a>. Your key stays in your browser.</p>
-      <input type="password" id="api-key-input" placeholder="sk-or-...">
-      <button class="btn-primary" onclick="saveApiKey()">Save Key</button>
+      <h3>API Keys</h3>
+      <p class="settings-hint">Add at least one key. <strong>OpenRouter</strong> (recommended) gives Symdy access to multiple models and auto-selection. <strong>DeepSeek</strong> is cheaper but uses a single model for everything.</p>
+      
+      <label>OpenRouter <span class="hint-badge">Recommended</span></label>
+      <div class="key-row">
+        <input type="password" id="api-key-openrouter" placeholder="sk-or-...">
+        <span class="key-status" id="status-openrouter"></span>
+      </div>
+      <p class="settings-sublabel">Get a key at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a></p>
+
+      <label>DeepSeek <span class="hint-badge hint-cheap">Cheapest</span></label>
+      <div class="key-row">
+        <input type="password" id="api-key-deepseek" placeholder="sk-...">
+        <span class="key-status" id="status-deepseek"></span>
+      </div>
+      <p class="settings-sublabel">Get a key at <a href="https://platform.deepseek.com/api_keys" target="_blank">platform.deepseek.com</a></p>
+
+      <label>Anthropic</label>
+      <div class="key-row">
+        <input type="password" id="api-key-anthropic" placeholder="sk-ant-...">
+        <span class="key-status" id="status-anthropic"></span>
+      </div>
+      <p class="settings-sublabel">Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></p>
+
+      <button class="btn-primary" onclick="saveAllKeys()">Save Keys</button>
     </div>
 
     <div class="settings-section">

@@ -10,41 +10,32 @@
 
 const Justifier = (() => {
   // ── Default Model Map ────────────────────────────────────────────────
-  // Prices: approximate per 1M tokens (input/output avg). Used for budget calc.
+  // OpenRouter model IDs. Translated for direct providers by router.js.
 
-  const DEFAULT_MODELS = {
-    chat: {
-      id: 'anthropic/claude-3.5-haiku',
-      name: 'Default',
-      costPer1M: 1.25,
-      description: 'Fast responses for everyday conversation'
+  const MODEL_MAPS = {
+    openrouter: {
+      chat:     { id: 'deepseek/deepseek-chat', name: 'Default', costPer1M: 0.89, description: 'Fast, cheap responses' },
+      analysis: { id: 'anthropic/claude-sonnet-4-20250514', name: 'Analysis', costPer1M: 3.0, description: 'Deeper reasoning' },
+      complex:  { id: 'anthropic/claude-opus-4-20250514', name: 'Complex', costPer1M: 15.0, description: 'Maximum reasoning' },
+      creative: { id: 'anthropic/claude-sonnet-4-20250514', name: 'Creative', costPer1M: 3.0, description: 'Writing and ideation' },
+      document: { id: 'google/gemini-2.5-pro-preview-05-06', name: 'Document', costPer1M: 2.5, description: 'Long context', maxContext: 1000000 }
     },
-    analysis: {
-      id: 'anthropic/claude-sonnet-4-20250514',
-      name: 'Analysis',
-      costPer1M: 3.0,
-      description: 'Deeper reasoning for analysis and explanations'
-    },
-    complex: {
-      id: 'anthropic/claude-opus-4-20250514',
-      name: 'Complex',
-      costPer1M: 15.0,
-      description: 'Maximum reasoning for difficult multi-step problems'
-    },
-    creative: {
-      id: 'anthropic/claude-sonnet-4-20250514',
-      name: 'Creative',
-      costPer1M: 3.0,
-      description: 'Writing, ideation, creative work'
-    },
-    document: {
-      id: 'google/gemini-2.5-pro-preview-05-06',
-      name: 'Document',
-      costPer1M: 2.5,
-      description: 'Large context window for document analysis',
-      maxContext: 1000000
+    deepseek: {
+      chat:     { id: 'deepseek-chat', name: 'Default', costPer1M: 0.27, description: 'Fast responses' },
+      analysis: { id: 'deepseek-reasoner', name: 'Analysis', costPer1M: 0.55, description: 'Reasoning mode' },
+      complex:  { id: 'deepseek-reasoner', name: 'Complex', costPer1M: 0.55, description: 'Deep reasoning' },
+      creative: { id: 'deepseek-chat', name: 'Creative', costPer1M: 0.27, description: 'Writing mode' },
+      document: { id: 'deepseek-chat', name: 'Document', costPer1M: 0.27, description: 'Document analysis' }
     }
   };
+
+  function _getActiveModelMap() {
+    if (localStorage.getItem('symdy_openrouter_key')) return MODEL_MAPS.openrouter;
+    if (localStorage.getItem('symdy_deepseek_key')) return MODEL_MAPS.deepseek;
+    if (localStorage.getItem('symdy_anthropic_key')) return MODEL_MAPS.openrouter; // uses same IDs
+    if (localStorage.getItem('symdy_openai_key')) return MODEL_MAPS.openrouter;
+    return MODEL_MAPS.openrouter; // fallback for budget calc
+  }
 
   // ── Task Classification Patterns ─────────────────────────────────────
   // Scored by keyword + structural signals. Higher score = more complex.
@@ -136,28 +127,24 @@ const Justifier = (() => {
   }
 
   function selectModel(taskClass, budgetRemaining = Infinity, contextLength = 0) {
-    const models = { ...DEFAULT_MODELS };
-
-    // If user has custom model preferences in settings, override defaults
-    // (handled by caller, not here — this is pure selection)
-
+    const models = _getActiveModelMap();
     let choice = models[taskClass] || models.chat;
 
-    // Budget fallback: if choosing the ideal model would blow the budget
+    // Budget fallback
     if (budgetRemaining < choice.costPer1M * 0.01) {
       choice = models.chat;
     }
 
-    // Context: if very long context, prefer document model
-    if (contextLength > 50000 && taskClass !== 'document') {
+    // Context: if very long context and we're on OpenRouter, prefer document model
+    if (contextLength > 50000 && taskClass !== 'document' && models.document && models.document.maxContext) {
       choice = models.document;
     }
 
     return choice;
   }
 
-  function getDefaultModels() {
-    return DEFAULT_MODELS;
+  function getModelMap() {
+    return _getActiveModelMap();
   }
 
   function explain(classification, model) {
@@ -176,7 +163,7 @@ const Justifier = (() => {
     };
   }
 
-  return { classify, selectModel, getDefaultModels, explain };
+  return { classify, selectModel, getModelMap, explain };
 })();
 
 if (typeof module !== 'undefined') module.exports = Justifier;

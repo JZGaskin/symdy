@@ -58,26 +58,32 @@ const App = (() => {
   // ── API Key ──────────────────────────────────────────────────────────
 
   function _checkApiKey() {
-    const key = localStorage.getItem('symdy_openrouter_key');
+    const hasKey = localStorage.getItem('symdy_openrouter_key') ||
+                   localStorage.getItem('symdy_deepseek_key') ||
+                   localStorage.getItem('symdy_anthropic_key') ||
+                   localStorage.getItem('symdy_openai_key');
     const banner = document.getElementById('key-warning');
-    if (!key && banner) {
+    if (!hasKey && banner) {
       banner.style.display = 'block';
     } else if (banner) {
       banner.style.display = 'none';
     }
   }
 
-  function _saveApiKey() {
-    const input = document.getElementById('api-key-input');
-    const key = input.value.trim();
-    if (key && key.startsWith('sk-or-')) {
-      localStorage.setItem('symdy_openrouter_key', key);
-      _checkApiKey();
-      _closeSettings();
-    } else if (key) {
-      alert('OpenRouter API keys start with "sk-or-". Get one at openrouter.ai/keys');
-    }
+  function saveAllKeys() {
+    const providers = {
+      openrouter: document.getElementById('api-key-openrouter').value.trim(),
+      deepseek: document.getElementById('api-key-deepseek').value.trim(),
+      anthropic: document.getElementById('api-key-anthropic').value.trim()
+    };
+    if (providers.openrouter) localStorage.setItem('symdy_openrouter_key', providers.openrouter);
+    if (providers.deepseek) localStorage.setItem('symdy_deepseek_key', providers.deepseek);
+    if (providers.anthropic) localStorage.setItem('symdy_anthropic_key', providers.anthropic);
+    _checkApiKey();
+    _closeSettings();
   }
+
+  window.saveAllKeys = saveAllKeys;
 
   // ── Thread List ──────────────────────────────────────────────────────
 
@@ -212,8 +218,9 @@ const App = (() => {
 
   function _openSettings() {
     document.getElementById('settings-panel').style.display = 'flex';
-    const key = localStorage.getItem('symdy_openrouter_key') || '';
-    document.getElementById('api-key-input').value = key;
+    document.getElementById('api-key-openrouter').value = localStorage.getItem('symdy_openrouter_key') || '';
+    document.getElementById('api-key-deepseek').value = localStorage.getItem('symdy_deepseek_key') || '';
+    document.getElementById('api-key-anthropic').value = localStorage.getItem('symdy_anthropic_key') || '';
     const budget = Storage.getSetting('monthly_budget', '');
     document.getElementById('budget-input').value = budget;
   }
@@ -232,7 +239,6 @@ const App = (() => {
 
   window.openSettings = _openSettings;
   window.closeSettings = _closeSettings;
-  window.saveApiKey = _saveApiKey;
   window.saveBudget = _saveBudget;
 
   // ── Export / Import ──────────────────────────────────────────────────
