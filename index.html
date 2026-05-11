@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symdy — Your AI companion</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://sql.js.org/dist/sql-wasm.js"></script>
+</head>
+<body>
+
+<!-- API Key Warning -->
+<div id="key-warning" style="display:none">
+  <span>⚠️ No API key configured. <a href="#" onclick="openSettings()">Add your OpenRouter key</a> to start.</span>
+</div>
+
+<!-- Onboarding -->
+<div id="onboarding" style="display:none">
+  <div class="onboard-card">
+    <h1>Symdy</h1>
+    <p class="onboard-sub">Your AI companion. Symdy remembers. Symdy learns.<br>Symdy gets better at understanding you every day.</p>
+
+    <div class="onboard-steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div>
+          <strong>Get an API key</strong>
+          <p>Create a free account at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> and generate a key. Add a few dollars in credits.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div>
+          <strong>Add your key</strong>
+          <p>Paste it in Settings. It stays in your browser — Symdy never sees it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div>
+          <strong>Start talking</strong>
+          <p>Ask anything. Symdy learns who you are across every conversation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="onboard-actions">
+      <button class="btn-primary" onclick="closeOnboarding(); openSettings();">Add API Key</button>
+      <button class="btn-secondary" onclick="closeOnboarding()">Skip for now</button>
+    </div>
+  </div>
+</div>
+
+<!-- App Layout -->
+<div id="app">
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <h2>Symdy</h2>
+      <button class="btn-icon" onclick="newThread()" title="New thread (Ctrl+N)">+</button>
+    </div>
+
+    <div id="thread-list"></div>
+
+    <div class="sidebar-footer">
+      <div id="stats" class="stats"></div>
+      <div class="sidebar-actions">
+        <button class="btn-sm" onclick="exportData()">Export</button>
+        <button class="btn-sm" onclick="importData()">Import</button>
+        <button class="btn-sm" onclick="openSettings()">Settings</button>
+      </div>
+      <input type="file" id="import-file" accept=".symdy" style="display:none">
+    </div>
+  </aside>
+
+  <!-- Main Chat Area -->
+  <main id="chat-area">
+    <div class="chat-header">
+      <span id="thread-title">Symdy</span>
+    </div>
+    <div id="messages"></div>
+    <div class="chat-input-area">
+      <textarea id="chat-input" placeholder="Ask anything..." rows="1"></textarea>
+      <button id="send-btn" onclick="sendMessage()" title="Send (Enter)">↑</button>
+    </div>
+  </main>
+</div>
+
+<!-- Settings Panel -->
+<div id="settings-panel" style="display:none">
+  <div class="settings-card">
+    <div class="settings-header">
+      <h2>Settings</h2>
+      <button class="btn-icon" onclick="closeSettings()">✕</button>
+    </div>
+
+    <div class="settings-section">
+      <h3>API Key</h3>
+      <p class="settings-hint">Get a key at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a>. Your key stays in your browser.</p>
+      <input type="password" id="api-key-input" placeholder="sk-or-...">
+      <button class="btn-primary" onclick="saveApiKey()">Save Key</button>
+    </div>
+
+    <div class="settings-section">
+      <h3>Monthly Budget</h3>
+      <p class="settings-hint">Symdy will use cheaper models as you approach your limit. Leave empty for no cap.</p>
+      <input type="number" id="budget-input" placeholder="$20" min="1" step="1">
+      <button class="btn-primary" onclick="saveBudget()">Save Budget</button>
+    </div>
+
+    <div class="settings-section">
+      <h3>Data</h3>
+      <p class="settings-hint">Everything is stored in your browser. Export to back up or move to another device.</p>
+      <div class="settings-actions">
+        <button class="btn-secondary" onclick="exportData()">Export Backup</button>
+        <button class="btn-secondary" onclick="importData()">Import Backup</button>
+      </div>
+    </div>
+
+    <div class="settings-footer">
+      <p>Symdy v0.1.0 · <a href="https://github.com/JZGaskin/symdy" target="_blank">GPLv3</a> · No data leaves your browser</p>
+    </div>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/justifier.js"></script>
+<script src="js/router.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
