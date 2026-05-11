@@ -4,150 +4,214 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Symdy — Your AI companion</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://sql.js.org/dist/sql-wasm.js"></script>
+  <meta name="description" content="Symdy remembers. Symdy learns. Symdy gets better at understanding you every day. A persistent cognitive dyad — human and AI, better together.">
+  <style>
+    :root {
+      --bg: #0a0a12;
+      --text: #e0e0e8;
+      --text-dim: #8888a0;
+      --accent: #7c8cf8;
+      --accent-glow: #9cabff;
+      --border: #1a1a2e;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    h1 {
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--accent-glow);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .tagline {
+      font-size: 20px;
+      color: var(--text-dim);
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+    .principle {
+      display: inline-block;
+      background: rgba(124, 140, 248, 0.1);
+      border: 1px solid rgba(124, 140, 248, 0.2);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 14px;
+      color: var(--accent-glow);
+      font-family: var(--font-mono);
+    }
+    section {
+      margin-bottom: 56px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    p, li {
+      color: var(--text-dim);
+      font-size: 16px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 600px) {
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+    .feature {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .feature h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .feature p {
+      font-size: 14px;
+    }
+    .install-block {
+      background: #0d0d1a;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+    }
+    .install-block h2 {
+      margin-bottom: 8px;
+    }
+    .install-block p {
+      margin-bottom: 24px;
+    }
+    code {
+      background: #15152a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent-glow);
+    }
+    pre {
+      background: #0d0d1a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-dim);
+      margin: 16px 0;
+      text-align: left;
+    }
+    .cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+    .cta:hover { background: var(--accent-glow); }
+    footer {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--text-dim);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--text-dim); }
+  </style>
 </head>
 <body>
 
-<!-- API Key Warning -->
-<div id="key-warning" style="display:none">
-  <span>⚠️ No API key configured. <a href="#" onclick="openSettings()">Add your OpenRouter key</a> to start.</span>
-</div>
-
-<!-- Onboarding -->
-<div id="onboarding" style="display:none">
-  <div class="onboard-card">
+<div class="container">
+  <header>
     <h1>Symdy</h1>
-    <p class="onboard-sub">Your AI companion. Symdy remembers. Symdy learns.<br>Symdy gets better at understanding you every day.</p>
+    <p class="tagline">A persistent cognitive dyad.<br>Human and AI, better together. Better every day.</p>
+    <span class="principle">BED — Better Every Day</span>
+  </header>
 
-    <div class="onboard-steps">
-      <div class="step">
-        <span class="step-num">1</span>
-        <div>
-          <strong>Get an API key</strong>
-          <p>Create a free account at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> (recommended) or <a href="https://platform.deepseek.com" target="_blank">DeepSeek</a> (cheapest). Add a few dollars in credits.</p>
-        </div>
+  <section>
+    <h2>What Symdy Is</h2>
+    <p>Symdy is not a chat app. Symdy is an AI companion that grows with you. It remembers what matters across every conversation. It learns who you are — your work, your projects, your preferences, the things you care about. Every exchange makes Symdy a better partner.</p>
+  </section>
+
+  <section>
+    <h2>How It Works</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Remembers</h3>
+        <p>Symdy stores what it learns about you — your role, your projects, your learning goals, your preferences. Nothing leaves your machine.</p>
       </div>
-      <div class="step">
-        <span class="step-num">2</span>
-        <div>
-          <strong>Add your key</strong>
-          <p>Paste it in Settings. It stays in your browser — Symdy never sees it.</p>
-        </div>
+      <div class="feature">
+        <h3>Learns</h3>
+        <p>Every conversation strengthens Symdy's understanding. Patterns emerge. Connections form. Symdy gets BED.</p>
       </div>
-      <div class="step">
-        <span class="step-num">3</span>
-        <div>
-          <strong>Start talking</strong>
-          <p>Ask anything. Symdy learns who you are across every conversation.</p>
-        </div>
+      <div class="feature">
+        <h3>Adapts</h3>
+        <p>Uses your existing AI subscriptions. ChatGPT Plus? Claude Pro? DeepSeek? Symdy works with what you already have.</p>
+      </div>
+      <div class="feature">
+        <h3>Runs Locally</h3>
+        <p>Your data stays on your machine. No cloud. No accounts. No one else sees what Symdy knows about you.</p>
       </div>
     </div>
+  </section>
 
-    <div class="onboard-actions">
-      <button class="btn-primary" onclick="closeOnboarding(); openSettings();">Add API Key</button>
-      <button class="btn-secondary" onclick="closeOnboarding()">Skip for now</button>
+  <section>
+    <div class="install-block">
+      <h2>Get Symdy</h2>
+      <p>Symdy runs as an extension for pi — the AI coding harness. Install pi, then add Symdy.</p>
+      <pre># Install pi
+npm install -g @earendil-works/pi-coding-agent
+
+# Install Symdy
+mkdir -p ~/.pi/agent/extensions/symdy
+curl -sL https://raw.githubusercontent.com/JZGaskin/symdy/main/index.ts \
+  -o ~/.pi/agent/extensions/symdy/index.ts
+
+# Run
+pi</pre>
+      <a href="https://github.com/JZGaskin/symdy" class="cta">View on GitHub →</a>
     </div>
-  </div>
+  </section>
+
+  <section>
+    <h2>Commands</h2>
+    <p>Once Symdy is installed, it works automatically — learning from every conversation. You can also use these commands:</p>
+    <pre>/symdy          — See what Symdy knows about you</pre>
+    <p style="margin-top:12px">Symdy also gives the AI two tools — <code>symdy_remember</code> and <code>symdy_recall</code> — so your AI partner can store and retrieve context about you automatically during conversations.</p>
+  </section>
 </div>
 
-<!-- App Layout -->
-<div id="app">
-  <!-- Sidebar -->
-  <aside id="sidebar">
-    <div class="sidebar-header">
-      <h2>Symdy</h2>
-      <button class="btn-icon" onclick="newThread()" title="New thread (Ctrl+N)">+</button>
-    </div>
+<footer>
+  <p>Symdy · <a href="https://github.com/JZGaskin/symdy">GPLv3</a> · A <a href="https://fieldwork.tools">Fieldwork</a> project</p>
+</footer>
 
-    <div id="thread-list"></div>
-
-    <div class="sidebar-footer">
-      <div id="stats" class="stats"></div>
-      <div class="sidebar-actions">
-        <button class="btn-sm" onclick="exportData()">Export</button>
-        <button class="btn-sm" onclick="importData()">Import</button>
-        <button class="btn-sm" onclick="openSettings()">Settings</button>
-      </div>
-      <input type="file" id="import-file" accept=".symdy" style="display:none">
-    </div>
-  </aside>
-
-  <!-- Main Chat Area -->
-  <main id="chat-area">
-    <div class="chat-header">
-      <span id="thread-title">Symdy</span>
-    </div>
-    <div id="messages"></div>
-    <div class="chat-input-area">
-      <textarea id="chat-input" placeholder="Ask anything..." rows="1"></textarea>
-      <button id="send-btn" onclick="sendMessage()" title="Send (Enter)">↑</button>
-    </div>
-  </main>
-</div>
-
-<!-- Settings Panel -->
-<div id="settings-panel" style="display:none">
-  <div class="settings-card">
-    <div class="settings-header">
-      <h2>Settings</h2>
-      <button class="btn-icon" onclick="closeSettings()">✕</button>
-    </div>
-
-    <div class="settings-section">
-      <h3>API Keys</h3>
-      <p class="settings-hint">Add at least one key. <strong>OpenRouter</strong> (recommended) gives Symdy access to multiple models and auto-selection. <strong>DeepSeek</strong> is cheaper but uses a single model for everything.</p>
-      
-      <label>OpenRouter <span class="hint-badge">Recommended</span></label>
-      <div class="key-row">
-        <input type="password" id="api-key-openrouter" placeholder="sk-or-...">
-        <span class="key-status" id="status-openrouter"></span>
-      </div>
-      <p class="settings-sublabel">Get a key at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a></p>
-
-      <label>DeepSeek <span class="hint-badge hint-cheap">Cheapest</span></label>
-      <div class="key-row">
-        <input type="password" id="api-key-deepseek" placeholder="sk-...">
-        <span class="key-status" id="status-deepseek"></span>
-      </div>
-      <p class="settings-sublabel">Get a key at <a href="https://platform.deepseek.com/api_keys" target="_blank">platform.deepseek.com</a></p>
-
-      <label>Anthropic</label>
-      <div class="key-row">
-        <input type="password" id="api-key-anthropic" placeholder="sk-ant-...">
-        <span class="key-status" id="status-anthropic"></span>
-      </div>
-      <p class="settings-sublabel">Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></p>
-
-      <button class="btn-primary" onclick="saveAllKeys()">Save Keys</button>
-    </div>
-
-    <div class="settings-section">
-      <h3>Monthly Budget</h3>
-      <p class="settings-hint">Symdy will use cheaper models as you approach your limit. Leave empty for no cap.</p>
-      <input type="number" id="budget-input" placeholder="$20" min="1" step="1">
-      <button class="btn-primary" onclick="saveBudget()">Save Budget</button>
-    </div>
-
-    <div class="settings-section">
-      <h3>Data</h3>
-      <p class="settings-hint">Everything is stored in your browser. Export to back up or move to another device.</p>
-      <div class="settings-actions">
-        <button class="btn-secondary" onclick="exportData()">Export Backup</button>
-        <button class="btn-secondary" onclick="importData()">Import Backup</button>
-      </div>
-    </div>
-
-    <div class="settings-footer">
-      <p>Symdy v0.1.0 · <a href="https://github.com/JZGaskin/symdy" target="_blank">GPLv3</a> · No data leaves your browser</p>
-    </div>
-  </div>
-</div>
-
-<script src="js/storage.js"></script>
-<script src="js/justifier.js"></script>
-<script src="js/router.js"></script>
-<script src="js/chat.js"></script>
-<script src="js/app.js"></script>
 </body>
 </html>
