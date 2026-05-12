@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Symdy — Your AI companion</title>
-  <meta name="description" content="Symdy remembers. Symdy learns. Symdy gets better at understanding you every day. A persistent cognitive dyad — human and AI, better together.">
+  <meta name="description" content="Symdy remembers. Symdy learns. Symdy gets better at understanding you every day. An AI companion that grows with you.">
   <style>
     :root {
       --bg: #0a0a12;
@@ -14,7 +14,6 @@
       --accent-glow: #9cabff;
       --border: #1a1a2e;
       --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      --font-mono: 'SF Mono', 'Fira Code', monospace;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -38,7 +37,7 @@
       font-weight: 700;
       color: var(--accent-glow);
       letter-spacing: -0.02em;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .tagline {
       font-size: 20px;
@@ -46,19 +45,17 @@
       max-width: 500px;
       margin: 0 auto 32px;
     }
-    .principle {
+    .badge {
       display: inline-block;
       background: rgba(124, 140, 248, 0.1);
       border: 1px solid rgba(124, 140, 248, 0.2);
       border-radius: 6px;
       padding: 4px 12px;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--accent-glow);
-      font-family: var(--font-mono);
+      letter-spacing: 0.02em;
     }
-    section {
-      margin-bottom: 56px;
-    }
+    section { margin-bottom: 56px; }
     h2 {
       font-size: 22px;
       font-weight: 600;
@@ -76,6 +73,7 @@
     }
     @media (max-width: 600px) {
       .feature-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 40px; }
     }
     .feature {
       background: rgba(255,255,255,0.03);
@@ -84,59 +82,51 @@
       padding: 24px;
     }
     .feature h3 {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
       margin-bottom: 8px;
-      color: var(--text);
     }
-    .feature p {
-      font-size: 14px;
-    }
-    .install-block {
+    .feature p { font-size: 14px; }
+    .download-block {
       background: #0d0d1a;
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 32px;
+      padding: 40px 32px;
       text-align: center;
     }
-    .install-block h2 {
-      margin-bottom: 8px;
+    .download-block h2 { margin-bottom: 8px; }
+    .download-block p { margin-bottom: 28px; }
+    .download-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    .install-block p {
-      margin-bottom: 24px;
-    }
-    code {
-      background: #15152a;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--accent-glow);
-    }
-    pre {
-      background: #0d0d1a;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px;
-      overflow-x: auto;
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--text-dim);
-      margin: 16px 0;
-      text-align: left;
-    }
-    .cta {
+    .dl-btn {
       display: inline-block;
       background: var(--accent);
       color: #fff;
       text-decoration: none;
-      padding: 14px 32px;
+      padding: 14px 28px;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       transition: background 0.15s;
     }
-    .cta:hover { background: var(--accent-glow); }
+    .dl-btn:hover { background: var(--accent-glow); }
+    .dl-btn.coming-soon {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      cursor: default;
+    }
+    .dl-btn.coming-soon:hover { background: transparent; }
+    .coming-note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .coming-note a { color: var(--accent); }
     footer {
       text-align: center;
       padding: 48px 24px;
@@ -152,65 +142,58 @@
 <div class="container">
   <header>
     <h1>Symdy</h1>
-    <p class="tagline">A persistent cognitive dyad.<br>Human and AI, better together. Better every day.</p>
-    <span class="principle">BED — Better Every Day</span>
+    <p class="tagline">An AI that remembers you.<br>Gets a little better every conversation.<br>Lives on your computer, not in the cloud.</p>
+    <span class="badge">Better Every Day</span>
   </header>
 
   <section>
-    <h2>What Symdy Is</h2>
-    <p>Symdy is not a chat app. Symdy is an AI companion that grows with you. It remembers what matters across every conversation. It learns who you are — your work, your projects, your preferences, the things you care about. Every exchange makes Symdy a better partner.</p>
+    <h2>What is Symdy?</h2>
+    <p>Symdy is a companion that you talk to — like a smart friend who remembers everything you've ever told them. Over time, Symdy learns what you do, what you care about, what you're working on, and what matters to you. The more you talk, the more helpful Symdy becomes.</p>
   </section>
 
   <section>
-    <h2>How It Works</h2>
+    <h2>Why people use Symdy</h2>
     <div class="feature-grid">
       <div class="feature">
-        <h3>Remembers</h3>
-        <p>Symdy stores what it learns about you — your role, your projects, your learning goals, your preferences. Nothing leaves your machine.</p>
+        <h3>It remembers</h3>
+        <p>Mention your kid's name once. Symdy remembers. Talk about a project at work. Symdy follows up next week. No more repeating yourself.</p>
       </div>
       <div class="feature">
-        <h3>Learns</h3>
-        <p>Every conversation strengthens Symdy's understanding. Patterns emerge. Connections form. Symdy gets BED.</p>
+        <h3>It learns you</h3>
+        <p>Symdy figures out how you like to communicate. Direct? Thoughtful? Quick bullet points? It adapts to you — not the other way around.</p>
       </div>
       <div class="feature">
-        <h3>Adapts</h3>
-        <p>Uses your existing AI subscriptions. ChatGPT Plus? Claude Pro? DeepSeek? Symdy works with what you already have.</p>
+        <h3>It's private</h3>
+        <p>Everything Symdy knows about you stays on your computer. No cloud. No accounts. No company reading your conversations.</p>
       </div>
       <div class="feature">
-        <h3>Runs Locally</h3>
-        <p>Your data stays on your machine. No cloud. No accounts. No one else sees what Symdy knows about you.</p>
+        <h3>No setup</h3>
+        <p>Download. Open. Talk. That's it. No API keys. No configuration. No confusing options. Symdy just works.</p>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="install-block">
-      <h2>Get Symdy</h2>
-      <p>Symdy runs as an extension for pi — the AI coding harness. Install pi, then add Symdy.</p>
-      <pre># Install pi
-npm install -g @earendil-works/pi-coding-agent
-
-# Install Symdy
-mkdir -p ~/.pi/agent/extensions/symdy
-curl -sL https://raw.githubusercontent.com/JZGaskin/symdy/main/index.ts \
-  -o ~/.pi/agent/extensions/symdy/index.ts
-
-# Run
-pi</pre>
-      <a href="https://github.com/JZGaskin/symdy" class="cta">View on GitHub →</a>
-    </div>
+    <h2>Who it's for</h2>
+    <p>Anyone who wants a smart partner that actually knows them. A director managing three facilities. A parent juggling schedules. Someone learning a new skill. A person with too much in their head and not enough hours in the day. Symdy remembers so you don't have to.</p>
   </section>
 
   <section>
-    <h2>Commands</h2>
-    <p>Once Symdy is installed, it works automatically — learning from every conversation. You can also use these commands:</p>
-    <pre>/symdy          — See what Symdy knows about you</pre>
-    <p style="margin-top:12px">Symdy also gives the AI two tools — <code>symdy_remember</code> and <code>symdy_recall</code> — so your AI partner can store and retrieve context about you automatically during conversations.</p>
+    <div class="download-block">
+      <h2>Download Symdy</h2>
+      <p>One click. No terminal. No setup. Just talk.</p>
+      <div class="download-buttons">
+        <span class="dl-btn coming-soon">Mac (coming soon)</span>
+        <span class="dl-btn coming-soon">Windows (coming soon)</span>
+        <span class="dl-btn coming-soon">Linux (coming soon)</span>
+      </div>
+      <p class="coming-note">Symdy is in active development. Want it first? <a href="https://github.com/JZGaskin/symdy-app">Follow along on GitHub</a> or <a href="mailto:support@z33design.com">email us</a>.</p>
+    </div>
   </section>
 </div>
 
 <footer>
-  <p>Symdy · <a href="https://github.com/JZGaskin/symdy">GPLv3</a> · A <a href="https://fieldwork.tools">Fieldwork</a> project</p>
+  <p>Symdy · Your data is yours · <a href="https://github.com/JZGaskin/symdy-app">Open source</a> · A <a href="https://fieldwork.tools">Fieldwork</a> project</p>
 </footer>
 
 </body>
