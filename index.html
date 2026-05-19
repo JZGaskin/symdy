@@ -57,13 +57,18 @@
       pointer-events: none;
     }
     .hero-content { position: relative; z-index: 1; max-width: 640px; }
-    .hero-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent-glow);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .logo-text {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
     }
     .hero-badge {
       display: inline-block;
@@ -289,7 +294,15 @@
 <!-- Hero -->
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-name">Symdy</div>
+    <div class="logo">
+      <svg width="40" height="40" viewBox="0 0 192 192" fill="none">
+        <circle cx="96" cy="96" r="46" stroke="#9cabff" stroke-width="4"/>
+        <circle cx="80" cy="88" r="5" fill="#9cabff"/>
+        <circle cx="112" cy="88" r="5" fill="#9cabff"/>
+        <path d="M72 112 Q96 130 120 112" stroke="#9cabff" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">Symdy</span>
+    </div>
     <div class="hero-badge">Better Every Day</div>
     <h1>The AI that <span>grows with you.</span></h1>
     <p>The more you talk to Symdy, the more it remembers — and the more useful it becomes. Goals, inbox, follow-ups. A partner who gets better every day.</p>
